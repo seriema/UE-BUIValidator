@@ -1,6 +1,8 @@
-# UE4 Texture Validator Plugin
+> This is a fork of https://github.com/benui-dev/UE-BUIValidator upgraded for UE5 and with additional features
 
-A plugin that validates settings for texture assets in Unreal Engine 4.
+# UE5 Texture Validator Plugin
+
+A plugin that validates settings for texture assets in Unreal Engine 5.
 
 
 ## What can it do?
@@ -9,7 +11,7 @@ A plugin that validates settings for texture assets in Unreal Engine 4.
   match customizable rules.
 * Automatically set default values for new textures upon import.
 * Set different validation rules for textures with different prefixes, or for
-  different folders within Unreal.
+  different folders or folder structures within Unreal.
 * Throw errors when users import textures without setting the Data Source
   Folder in their Editor Settings.
 * Throw errors when `UPROPERTY()` values are not set.
