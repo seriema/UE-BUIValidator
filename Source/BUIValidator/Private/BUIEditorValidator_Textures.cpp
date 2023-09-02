@@ -119,6 +119,26 @@ EDataValidationResult UBUIEditorValidator_Textures::ValidateLoadedAsset_Implemen
 					}
 				}
 
+				if ( Group.ValidationRule.TextureFilters.Num() )
+				{
+					bAnyChecked = true;
+					if ( !Group.ValidationRule.TextureFilters.Contains( Texture->Filter ) )
+					{
+						bAnyFailed = true;
+						TArray<FString> TextureFilterNames;
+						UEnum* TextureFiltersEnum = StaticEnum<TextureFilter>();
+						for ( const auto& TextureFilter : Group.ValidationRule.TextureFilters )
+						{
+							TextureFilterNames.Add( TextureFiltersEnum->GetMetaData( TEXT( "DisplayName" ), TextureFilter ) );
+						}
+						AssetFails( InAsset, FText::Format(
+							LOCTEXT( "BUIValidatorError_TextureFilter", "Texture asset filter settings must be '{0}', but is '{1}'" ),
+							FText::FromString( FString::Join( TextureFilterNames, TEXT( ", " ) ) ),
+							FText::FromString( TextureFiltersEnum->GetMetaData( TEXT( "DisplayName" ), Texture->Filter ) ) ),
+							ValidationErrors );
+					}
+				}
+
 				if ( Group.ValidationRule.TextureSizeRequirements.Num() > 0 )
 				{
 					bAnyChecked = true;
