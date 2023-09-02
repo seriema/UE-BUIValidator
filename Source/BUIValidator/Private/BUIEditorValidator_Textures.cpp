@@ -176,19 +176,24 @@ EDataValidationResult UBUIEditorValidator_Textures::ValidateLoadedAsset_Implemen
 
 					const UEditorPerProjectUserSettings& EditorSettings = *GetDefault<UEditorPerProjectUserSettings>();
 
-					if ( EditorSettings.DataSourceFolder.Path.IsEmpty() )
+					// If we're running in an automated environment such as a build server, then fake a data source path
+					const FString DataSourceFolder = !GIsEditor && DataSourceFolder.IsEmpty() ? 
+						"C:/MockPath/ForAutomatedTests/" :
+						EditorSettings.DataSourceFolder.Path;
+
+					if ( DataSourceFolder.IsEmpty() )
 					{
 						bAnyFailed = true;
 						AssetFails( InAsset, LOCTEXT( "BUIValidatorError_NoDataSourceFolder",
 							"Data Source Folder must be set. Please set it in Editor Preferences" ),
 							ValidationErrors );
 					}
-					else if ( !ImportAssetPath.StartsWith( EditorSettings.DataSourceFolder.Path ) )
+					else if ( !ImportAssetPath.StartsWith( DataSourceFolder ) )
 					{
 						bAnyFailed = true;
 						AssetFails( InAsset, FText::Format( LOCTEXT( "BUIValidatorError_FileImportedOutsideDataSourceFolder", "Importing a file from '{0}', outside of Data Source Folder '{1}'" ),
 							FText::FromString( ImportAssetPath ),
-							FText::FromString( EditorSettings.DataSourceFolder.Path ) ), ValidationErrors );
+							FText::FromString( DataSourceFolder ) ), ValidationErrors );
 					}
 				}
 			}
