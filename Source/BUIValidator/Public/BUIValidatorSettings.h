@@ -82,6 +82,10 @@ public:
 	UPROPERTY( config, EditAnywhere )
 	TArray<TEnumAsByte<TextureMipGenSettings>> MipGenSettings = { TextureMipGenSettings::TMGS_FromTextureGroup };
 
+	// Textures must have one of these filter settings
+	UPROPERTY( config, EditAnywhere )
+	TArray<TEnumAsByte<TextureFilter>> TextureFilters = { TextureFilter::TF_Default };
+
 	// Textures must have one of these prefixes. Is not applied on import
 	UPROPERTY( config, EditAnywhere )
 	TArray<FString> Prefixes = { "T_UI_" };

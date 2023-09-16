@@ -47,6 +47,7 @@ could be allowed to be within World or UI. To pass, the asset must match
   Compression Settings.
 * **Pixel Formats:** Textures must have one of these Pixel Formats
 * **Mip Gen Settings:** Textures must have one of these Mip Gen Settings
+* **Texture Filters:**Textures must have one of these Filters
 * **Prefixes:** Textures must have one of these prefixes.
 * **Texture Size:** Textures must pass these size requirements. Size
   requirements are "Multiple of Four" or "Power of Two"
