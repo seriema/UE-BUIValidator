@@ -45,7 +45,7 @@ public:
 	TArray<FString> Prefixes = { "T_UI_" };
 
 	// Match UTexture2D assets under any of these directories
-	UPROPERTY( EditAnywhere, meta = ( TitleProperty = "Path" ) )
+	UPROPERTY( EditAnywhere, meta = ( TitleProperty = "{Type} {Path}" ) )
 	TArray<FBUIPathFilter> Paths = {
 		{ EBUIPathType::Contains, "/UI/" }
 	};
